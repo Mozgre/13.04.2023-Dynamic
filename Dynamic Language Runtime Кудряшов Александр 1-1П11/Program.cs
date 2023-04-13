@@ -1,5 +1,6 @@
 ﻿// Net 6.0
 using ClassLibrary1;
+using Dynamic_Language_Runtime_Кудряшов_Александр_1_1П11;
 using System.Dynamic;
 
 class Program
@@ -8,35 +9,39 @@ class Program
     {
         static void Print(dynamic student)
         {
-            Console.WriteLine("\n Данные студента: ");
+            Console.WriteLine("\nДанные студента: ");
             Console.WriteLine(student.Name);
             Console.WriteLine(student.Familia);
-            Console.WriteLine(student.Otchestvo);
+            Console.WriteLine(student.Surname);
             Console.WriteLine(student.Gryppa);
-            Console.WriteLine(student.Otchestvo);
+            Console.WriteLine(student.Data);
         }
         var student = CreateStudent();
         Print(student);
 
         static void Print1(dynamic specialnost)
         {
-            Console.WriteLine("\n Данные группы: ");
-            Console.WriteLine(specialnost.Nazvanie);
+            Console.WriteLine("\nДанные специальности: ");
+            Console.WriteLine(specialnost.Name);
             Console.WriteLine(specialnost.Reduction);
         }
         var specialnost = CreateSpecialnost();
         Print1(specialnost);
-
         static void Print2(dynamic para)
         {
-            Console.WriteLine("\n Данные специальности ");
+            Console.WriteLine("\nДанные пары: ");
+            Console.WriteLine(para.Nachpar);
+            Console.WriteLine(para.Okonchpar);
+            Console.WriteLine(para.Nachper);
+            Console.WriteLine(para.Okonchper);
+            Console.WriteLine(para.Smena);
         }
         var para = CreatePara();
         Print2(para);
 
         static void Print3(dynamic smena)
         {
-            Console.WriteLine("\n Данные смены: ");
+            Console.WriteLine("\nДанные смены: ");
             Console.WriteLine(smena.Nazvanie);
         }
         var smena = CreateSmena();
@@ -50,54 +55,45 @@ class Program
         Console.WriteLine("Введите имя студента: ");
         student.Name = Console.ReadLine() ?? "Нет значения";
         Console.WriteLine("Введите отчество студента: ");
-        student.Otchectvo = Console.ReadLine() ?? "Нет значения";
+        student.Surname = Console.ReadLine() ?? "Нет значения";
         student.Gryppa = CreateGryppa();
         Console.WriteLine("Введите дату: ");
         student.Data = Console.ReadLine() ?? "Нет значения";
         return student;
     }
-    static ExpandoObject CreateGryppa() 
+    static Gryppa CreateGryppa() 
     {
-        dynamic gryppa = new ExpandoObject();
-        Console.WriteLine("Введите название группы: ");
-        gryppa.Name = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите сокращение названия группы: ");
-        gryppa.Shortname = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите численность группы: ");
-        gryppa.Chislennost = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите год поступления студента: ");
-        gryppa.YearPostyp = Console.ReadLine() ?? "Нет значения";
-        gryppa.Specialnost = CreateSpecialnost();
-        gryppa.ClassLeader = CreateSotrydnik();
-        return gryppa;
+        return new Gryppa();
     }
-    static Para CreatePara()
+    static ExpandoObject CreatePara()
     {
-        return new Para();
+        dynamic para = new ExpandoObject();
+        Console.WriteLine("\nВведите время начала пары: ");
+        para.Nachpar = Console.ReadLine() ?? "Нет значения";
+        Console.WriteLine("Введите время конца пары: ");
+        para.Okonchpar = Console.ReadLine() ?? "Нет значения";
+        Console.WriteLine("Введите время начала перерыва: ");
+        para.Nachper = Console.ReadLine() ?? "Нет значения";
+        Console.WriteLine("Введите время конца перерыва: ");
+        para.Okonchper = Console.ReadLine() ?? "Нет значения";
+        para.Smena = "Первая";
+        return para;
     }
     static ExpandoObject CreateSmena()
     {
         dynamic smena = new ExpandoObject();
-        Console.WriteLine("Введите название смены: ");
+        Console.WriteLine("\nВведите название смены: ");
         smena.Nazvanie = Console.ReadLine() ?? "Нет значения";
         return smena;
     }
-    static ExpandoObject CreatePodrazdelenie()
+    static Podrazdelenie CreatePodrazdelenie()
     {
-        dynamic podrazdelenie = new ExpandoObject();
-        Console.WriteLine("Введите имя студента: ");
-        podrazdelenie.Nazvanie = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите имя студента: ");
-        podrazdelenie.Rykovoditel = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите имя студента: ");
-        podrazdelenie.Organizacia = Console.ReadLine() ?? "Нет значения";
-        Console.WriteLine("Введите имя студента: ");
-        return podrazdelenie;
+        return new Podrazdelenie();
     }
     static ExpandoObject CreateSotrydnik()
     {
         dynamic sotrydnik = new ExpandoObject();
-        Console.WriteLine("Введите фамилию сотрудника: ");
+        Console.WriteLine("\nВведите фамилию сотрудника: ");
         sotrydnik.Surname = Console.ReadLine() ?? "Нет значения";
         Console.WriteLine("Введите имя сотрудника: ");
         sotrydnik.Name = Console.ReadLine() ?? "Нет значения";
@@ -109,7 +105,7 @@ class Program
     static ExpandoObject CreateSpecialnost()
     {
         dynamic specialnost = new ExpandoObject();
-        Console.WriteLine("Введите название специальности: ");
+        Console.WriteLine("\nВведите название специальности: ");
         specialnost.Name = Console.ReadLine() ?? "Нет значения";
         Console.WriteLine("Введите сокращение названия специальности: ");
         specialnost.Reduction = Console.ReadLine() ?? "Нет значения";
